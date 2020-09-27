@@ -18,12 +18,31 @@
 #define MIN_OPTION_MENU 1
 #define MAX_OPTION_MENU 4
 #define MAX_OPTION_MENU_INFO 5
+#define MAX_SALARY 999999
+#define MAX_SECTOR 50
 
 int main(void)
 {
-	Employee employees[ARRAY_NAME_LEN];
+	//Declaracion de las Variables
+	Employee employees[ARRAY_LEN_EMPLOYEES];
 	int optionMenu;
+	int id = 0;
+	char name[ARRAY_NAME_LEN];
+	char lastName[ARRAY_LASTNAME_LEN];
+	float salary;
+	int sector;
 
+	//Inicializacion del Array
+	if(!initEmployees(employees,ARRAY_LEN_EMPLOYEES))
+	{
+		printf("\nEl Array se Inicializo con Exito!!\n");
+	}
+	else
+	{
+		printf("\nEl Array no pudo inicializarse!!\n");
+	}
+
+	//Menu Principal
 	do
 	{
 		if(!utn_getNumero(   &optionMenu,
@@ -41,6 +60,22 @@ int main(void)
 				case 1:
 					printf("\n***************************************\n");
 					printf("Opcion 1\nDar de alta un empleado:\n");
+					if(	!utn_getNombre(name,ARRAY_NAME_LEN,"Ingrese el nombre: ","ERROR\n",QTY_REINT) &&
+						!utn_getApellido(lastName,ARRAY_LASTNAME_LEN,"Ingrese un apellido: ","ERROR\n",QTY_REINT)&&
+						!utn_getNumeroFlotante(&salary,"Ingrese el salario: ","ERROR",ZERO,MAX_SALARY,QTY_REINT)&&
+						!utn_getNumero(&sector,"Ingrese un sector: ","ERROR",ZERO,MAX_SECTOR,QTY_REINT))
+					{
+						if(!addEmployee(employees,ARRAY_LEN_EMPLOYEES,id,name,lastName,salary,sector))
+						{
+							printf("El empleado se cargo con exito!!\n");
+						}
+					}
+					else
+					{
+						printf("Algo salio mal, se acabaron tus reintentos.\n");
+					}
+					printf("Lista de empleados:\n");
+					mostrarLista(employees,ARRAY_LEN_EMPLOYEES);
 					printf("\n***************************************\n");
 					break;
 				case 2:
