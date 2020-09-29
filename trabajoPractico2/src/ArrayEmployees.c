@@ -121,13 +121,12 @@ int printEmployees(Employee* list, int len)
 			if(list[i].isEmpty==FALSE)
 			{
 				ret=0;
-				printf("ID:%d - Nombre:%s %s - Salario:%.2f - Sector:%d - Estado:%d\n",
+				printf("ID:%d - Nombre:%s - Apellido:%s - Salario:%.2f - Sector:%d\n",
 						list[i].id,
 						list[i].name,
 						list[i].lastName,
 						list[i].salary,
-						list[i].sector,
-						list[i].isEmpty);
+						list[i].sector);
 			}
 		}
 	}
@@ -332,23 +331,71 @@ int editSectorEmployee(Employee* list, int len, int indice)
 int printEmployeeById(Employee* list, int len, int id)
 {
 	int ret=-1;
-		int i=0;
-		if(list!=NULL && len>0)
+	int i=0;
+	if(list!=NULL && len>0)
+	{
+		for(i=0;i<len;i++)
 		{
-			for(i=0;i<len;i++)
+			if(list[i].isEmpty==FALSE && list[i].id==id)
 			{
-				if(list[i].isEmpty==FALSE && list[i].id==id)
+				ret=0;
+				printf("ID:%d - Nombre:%s - Apellido:%s - Salario:%.2f - Sector:%d\n",
+						list[i].id,
+						list[i].name,
+						list[i].lastName,
+						list[i].salary,
+						list[i].sector);
+			}
+		}
+	}
+	return ret;
+}
+/**
+* \brief Remove a Employee by Id (put isEmpty Flag in 1)
+* \param list Employee*
+* \param len int
+* \param id int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or if can't find a employee] - (0) if Ok
+*/
+int removeEmployee(Employee* list, int len, int id)
+{
+	int ret=-1;
+	Employee bufferEmployee;
+	int auxIndice;
+	char auxChar;
+	if(list!=NULL && len>0 && id>=0)
+	{
+		auxIndice = findEmployeeById(list,ARRAY_LEN_EMPLOYEES,id);
+		if(auxIndice>=0)
+		{
+			if(!utn_getCaracterSN(&auxChar,ARRAY_LEN_CHAR,
+					   	   	   	  "Esta seguro que desea borrar este Alumno?[S/N]:",
+								  "ERROR\n",QTY_REINT))
+			{
+				switch(auxChar)
 				{
-					ret=0;
-					printf("ID:%d - Nombre:%s - Apellido: %s - Salario:%.2f - Sector:%d - Estado:%d\n",
-							list[i].id,
-							list[i].name,
-							list[i].lastName,
-							list[i].salary,
-							list[i].sector,
-							list[i].isEmpty);
+					 case 'S':
+					 case 's':
+						bufferEmployee.id = list[auxIndice].id;
+						strncpy(bufferEmployee.name,list[auxIndice].name,ARRAY_NAME_LEN);
+						strncpy(bufferEmployee.lastName,list[auxIndice].lastName,ARRAY_NAME_LEN);
+						bufferEmployee.salary = list[auxIndice].salary;
+						bufferEmployee.sector = list[auxIndice].sector;
+						bufferEmployee.isEmpty = TRUE;
+						list[auxIndice]=bufferEmployee;
+						ret=0;
+						break;
+					 case 'N':
+					 case 'n':
+						 break;
 				}
 			}
 		}
-		return ret;
+		else
+		{
+				printf("Usted ingreso un ID que no existe.\n");
+		}
+	}
+	return ret;
 }
+

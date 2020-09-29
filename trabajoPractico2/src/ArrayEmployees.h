@@ -47,5 +47,6 @@ int editNameEmployee(Employee* list, int len, int indice);
 int editLastNameEmployee(Employee* list, int len, int indice);
 int editSalaryEmployee(Employee* list, int len, int indice);
 int editSectorEmployee(Employee* list, int len, int indice);
+int removeEmployee(Employee* list, int len, int id);
 
 #endif /* ARRAYEMPLOYEES_H_ */
