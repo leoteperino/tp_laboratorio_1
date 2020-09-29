@@ -122,7 +122,7 @@ int printEmployees(Employee* list, int len)
 			if(list[i].isEmpty==FALSE)
 			{
 				ret=0;
-				printf("ID:%d - Nombre:%s - Apellido:%s - Salario:%.2f - Sector:%d\n",
+				printf("ID:%d	- Nombre:%s %s - Salario:%.2f - Sector:%d\n",
 						list[i].id,
 						list[i].name,
 						list[i].lastName,
