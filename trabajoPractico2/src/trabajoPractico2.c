@@ -27,6 +27,7 @@ int main(void)
 	int sector;
 	int auxIndice;
 	int auxId;
+	int optionMenuEdit;
 
 	//Inicializacion del Array
 	if(!initEmployees(employees,ARRAY_LEN_EMPLOYEES))
@@ -89,29 +90,84 @@ int main(void)
 				case 2:
 					printf("\n***************************************\n");
 					printf("Opcion 2\nModificar un empleado:\n");
-					if(!printEmployees(employees,ARRAY_LEN_EMPLOYEES))
-					{
-						if(!utn_getNumero(	&auxId,
-										"Ingrese el numero de ID del empleado a modificar: ",
-										"ERROR\n",ZERO,MAX_ID,QTY_REINT))
-						{
-							auxIndice = findEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
-							if(auxIndice>=0)
-							{
-
-							}
-							else
-							{
-								printf("Usted ingreso un ID que no existe.\n");
-							}
-						}
-
-					}
-					else
+					if(printEmployees(employees,ARRAY_LEN_EMPLOYEES)==-1)
 					{
 						printf("La lista de empleado esta vacia.\nDebe cargar un empleado para poder continuar.\n");
 					}
-
+					if(!utn_getNumero(	&auxId,
+										"Ingrese el numero de ID del empleado a modificar: ",
+										"ERROR\n",ZERO,MAX_ID,QTY_REINT))
+					{
+						printf("\nEmpleado seleccionado:\n");
+						printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
+						auxIndice = findEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
+						if(auxIndice>=0)
+						{
+							do
+							{
+								if( !utn_getNumero( &optionMenuEdit,
+													"*****Menu de Opciones de Edicion*****\n"
+													"Ingrese el campo que desea modificar:\n"
+													"1 - Nombre\n"
+													"2 - Apellido\n"
+													"3 - Salario\n"
+													"4 - Sector\n"
+													"5 - Volver al menu principal\n"
+													"-----------------------------\n"
+													"Ingrese la opcion deseada: ",
+													"ERROR",MIN_OPTION_EDIT,MAX_OPTION_EDIT,QTY_REINT))
+								{
+									switch(optionMenuEdit)
+									{
+										case 1:
+											if(!editNameEmployee(employees,ARRAY_LEN_EMPLOYEES,auxIndice))
+											{
+												printf("\n***************************************\n");
+												printf("El empleado se edito con exito!\n");
+												printf("Empleado actualizado: \n");
+												printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
+												printf("***************************************\n");
+											}
+											break;
+										case 2:
+											if(!editLastNameEmployee(employees,ARRAY_LEN_EMPLOYEES,auxIndice))
+											{
+												printf("\n***************************************\n");
+												printf("El empleado se edito con exito!\n");
+												printf("Empleado actualizado: \n");
+												printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
+												printf("***************************************\n");
+											}
+											break;
+										case 3:
+											if(!editSalaryEmployee(employees,ARRAY_LEN_EMPLOYEES,auxIndice))
+											{
+												printf("\n***************************************\n");
+												printf("El empleado se edito con exito!\n");
+												printf("Empleado actualizado: \n");
+												printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
+												printf("***************************************\n");
+											}
+											break;
+										case 4:
+											if(!editSectorEmployee(employees,ARRAY_LEN_EMPLOYEES,auxIndice))
+											{
+												printf("\n***************************************\n");
+												printf("El empleado se edito con exito!\n");
+												printf("Empleado actualizado: \n");
+												printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
+												printf("***************************************\n");
+											}
+											break;
+									}
+								}
+							}while(optionMenuEdit!=5);
+						}
+						else
+						{
+							printf("Usted ingreso un ID que no existe.\n");
+						}
+					}
 					printf("\n***************************************\n");
 					break;
 				case 3:

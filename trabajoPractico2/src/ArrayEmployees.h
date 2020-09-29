@@ -21,6 +21,9 @@
 #define MAX_SALARY 999999
 #define MAX_SECTOR 50
 #define MAX_ID 999999
+#define MIN_OPTION_EDIT 1
+#define MAX_OPTION_EDIT 5
+#define CLEAR "clear"
 
 typedef struct
 {
@@ -38,5 +41,11 @@ int addEmployee(Employee* list, int len, int id, char name[],char lastName[],flo
 int printEmployees(Employee* list, int len);
 int buscarVacio(Employee* list, int len);
 int mocksEmployees(Employee* list, int len, int indice, int id, char* name,char* lastName,float salary,int sector);
+int editEmployee(Employee* list, int len, int indice);
+int printEmployeeById(Employee* list, int len, int id);
+int editNameEmployee(Employee* list, int len, int indice);
+int editLastNameEmployee(Employee* list, int len, int indice);
+int editSalaryEmployee(Employee* list, int len, int indice);
+int editSectorEmployee(Employee* list, int len, int indice);
 
 #endif /* ARRAYEMPLOYEES_H_ */

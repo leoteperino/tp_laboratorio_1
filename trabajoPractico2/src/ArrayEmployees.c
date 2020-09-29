@@ -184,7 +184,6 @@ int mocksEmployees(Employee* list, int len, int indice, int id, char* name,char*
 	}
 	return ret;
 }
-
 /**
  * \brief Realiza la edicion de un empleado solo si el indice es valido.
  * \param Employee list, Es el puntero al array de empleados
@@ -208,9 +207,148 @@ int editEmployee(Employee* list, int len, int indice)
 			                "ERROR",ZERO,MAX_SECTOR,QTY_REINT))
 		{
 			bufferEmployee.id = list[indice].id;
+			bufferEmployee.isEmpty = list[indice].isEmpty;
 			list[indice]=bufferEmployee;
 			ret=0;
 		}
 	}
 	return ret;
+}
+/**
+ * \brief Realiza la edicion del nombre de un empleado solo si el indice es valido.
+ * \param Employee list, Es el puntero al array de empleados
+ * \param int len, es el limite de array
+ * \param int indice, es el indice donde se modificara el empleado
+ * \return (-1) Error / (0) Ok
+ */
+int editNameEmployee(Employee* list, int len, int indice)
+{
+	int ret=-1;
+	Employee bufferEmployee;
+	if(list!=NULL && len>0 && indice>=0 && indice<=len)
+	{
+		if(	!utn_getNombre( bufferEmployee.name,ARRAY_NAME_LEN,
+							"Ingrese el nuevo nombre: ","ERROR\n",QTY_REINT))
+		{
+			bufferEmployee.id = list[indice].id;
+			strncpy(bufferEmployee.lastName,list[indice].lastName,ARRAY_NAME_LEN);
+			bufferEmployee.salary = list[indice].salary;
+			bufferEmployee.sector = list[indice].sector;
+			bufferEmployee.isEmpty = list[indice].isEmpty;
+			list[indice]=bufferEmployee;
+			ret=0;
+		}
+	}
+	return ret;
+}
+/**
+ * \brief Realiza la edicion del Apellido de un empleado solo si el indice es valido.
+ * \param Employee list, Es el puntero al array de empleados
+ * \param int len, es el limite de array
+ * \param int indice, es el indice donde se modificara el empleado
+ * \return (-1) Error / (0) Ok
+ */
+int editLastNameEmployee(Employee* list, int len, int indice)
+{
+	int ret=-1;
+	Employee bufferEmployee;
+	if(list!=NULL && len>0 && indice>=0 && indice<=len)
+	{
+		if(	!utn_getApellido( bufferEmployee.lastName,ARRAY_NAME_LEN,
+							  "Ingrese el nuevo apellido: ","ERROR\n",QTY_REINT))
+		{
+			bufferEmployee.id = list[indice].id;
+			strncpy(bufferEmployee.name,list[indice].name,ARRAY_NAME_LEN);
+			bufferEmployee.salary = list[indice].salary;
+			bufferEmployee.sector = list[indice].sector;
+			bufferEmployee.isEmpty = list[indice].isEmpty;
+			list[indice]=bufferEmployee;
+			ret=0;
+		}
+	}
+	return ret;
+}
+/**
+ * \brief Realiza la edicion del salario de un empleado solo si el indice es valido.
+ * \param Employee list, Es el puntero al array de empleados
+ * \param int len, es el limite de array
+ * \param int indice, es el indice donde se modificara el empleado
+ * \return (-1) Error / (0) Ok
+ */
+int editSalaryEmployee(Employee* list, int len, int indice)
+{
+	int ret=-1;
+	Employee bufferEmployee;
+	if(list!=NULL && len>0 && indice>=0 && indice<=len)
+	{
+		if(	!utn_getNumeroFlotante( &bufferEmployee.salary,"Ingrese el nuevo salario: ",
+				"ERROR",ZERO,MAX_SALARY,QTY_REINT))
+		{
+			bufferEmployee.id = list[indice].id;
+			strncpy(bufferEmployee.name,list[indice].name,ARRAY_NAME_LEN);
+			strncpy(bufferEmployee.lastName,list[indice].lastName,ARRAY_NAME_LEN);
+			bufferEmployee.sector = list[indice].sector;
+			bufferEmployee.isEmpty = list[indice].isEmpty;
+			list[indice]=bufferEmployee;
+			ret=0;
+		}
+	}
+	return ret;
+}
+/**
+ * \brief Realiza la edicion del sector de un empleado solo si el indice es valido.
+ * \param Employee list, Es el puntero al array de empleados
+ * \param int len, es el limite de array
+ * \param int indice, es el indice donde se modificara el empleado
+ * \return (-1) Error / (0) Ok
+ */
+int editSectorEmployee(Employee* list, int len, int indice)
+{
+	int ret=-1;
+	Employee bufferEmployee;
+	if(list!=NULL && len>0 && indice>=0 && indice<=len)
+	{
+		if(	!utn_getNumero( &bufferEmployee.sector,"Ingrese el nuevo sector: ",
+                            "ERROR",ZERO,MAX_SECTOR,QTY_REINT))
+		{
+			bufferEmployee.id = list[indice].id;
+			strncpy(bufferEmployee.name,list[indice].name,ARRAY_NAME_LEN);
+			strncpy(bufferEmployee.lastName,list[indice].lastName,ARRAY_NAME_LEN);
+			bufferEmployee.salary = list[indice].salary;
+			bufferEmployee.isEmpty = list[indice].isEmpty;
+			list[indice]=bufferEmployee;
+			ret=0;
+		}
+	}
+	return ret;
+}
+/**
+* \brief Muestra el empleado seleccionado por ID
+* \param list Employee*
+* \param length int
+* \param int id del empleado seleccionado
+* \return -1 (ERROR) - 0 (OK).
+*/
+int printEmployeeById(Employee* list, int len, int id)
+{
+	int ret=-1;
+		int i=0;
+		if(list!=NULL && len>0)
+		{
+			for(i=0;i<len;i++)
+			{
+				if(list[i].isEmpty==FALSE && list[i].id==id)
+				{
+					ret=0;
+					printf("ID:%d - Nombre:%s - Apellido: %s - Salario:%.2f - Sector:%d - Estado:%d\n",
+							list[i].id,
+							list[i].name,
+							list[i].lastName,
+							list[i].salary,
+							list[i].sector,
+							list[i].isEmpty);
+				}
+			}
+		}
+		return ret;
 }
