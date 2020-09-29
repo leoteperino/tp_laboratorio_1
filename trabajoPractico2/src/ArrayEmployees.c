@@ -105,13 +105,12 @@ static int generarIdNuevo(void)
 	id = id+1;
 	return id;
 }
-/**
- * \brief Imprime los empleados cargados
- * \param Employee array[], Es el puntero al array de Empleados
- * \param int len, es el limite de array
- * \return (-1) Error / (0) Ok
- */
-int mostrarLista(Employee* list, int len)
+/** \brief print the content of employees array
+* \param list Employee*
+* \param length int
+* \return int
+*/
+int printEmployees(Employee* list, int len)
 {
 	int ret=-1;
 	int i=0;
@@ -153,6 +152,64 @@ int buscarVacio(Employee* list, int len)
 				ret = i;
 				break;
 			}
+		}
+	}
+	return ret;
+}
+
+/**
+ * \brief Da de alta un Empleado en una posicion del array de manera forzada
+ * \param array Array de empleados a ser actualizado
+ * \param int len longitud del array de empleados
+ * \param indice Posicion a ser actualizada
+ * \param id Identificador a ser asignado al publicacion
+ * \return Retorna 0 (EXITO) y -1 (ERROR)
+ *
+ */
+int mocksEmployees(Employee* list, int len, int indice, int id, char* name,char* lastName,float salary,int sector)
+{
+	int ret = -1;
+	Employee bufferEmployee;
+
+	if(list!= NULL && len>0 && indice<len && indice>=0 && id>=0 && name!=NULL && lastName!=NULL && salary>0 && sector>=0)
+	{
+		bufferEmployee.id=generarIdNuevo();
+		bufferEmployee.isEmpty = FALSE;
+		strncpy(bufferEmployee.name,name,ARRAY_NAME_LEN);
+		strncpy(bufferEmployee.lastName,lastName,ARRAY_LASTNAME_LEN);
+		bufferEmployee.salary=salary;
+		bufferEmployee.sector=sector;
+		list[indice] = bufferEmployee;
+		ret=0;
+	}
+	return ret;
+}
+
+/**
+ * \brief Realiza la edicion de un empleado solo si el indice es valido.
+ * \param Employee list, Es el puntero al array de empleados
+ * \param int len, es el limite de array
+ * \param int indice, es el indice donde se modificara el empleado
+ * \return (-1) Error / (0) Ok
+ */
+int editEmployee(Employee* list, int len, int indice)
+{
+	int ret=-1;
+	Employee bufferEmployee;
+	if(list!=NULL && len>0 && indice>=0 && indice<=len)
+	{
+		if(	!utn_getNombre( bufferEmployee.name,ARRAY_NAME_LEN,
+							"Ingrese un nombre: ","ERROR\n",QTY_REINT) &&
+			!utn_getApellido( bufferEmployee.lastName,ARRAY_LASTNAME_LEN,
+							  "Ingrese un apellido: ","ERROR\n",QTY_REINT) &&
+			!utn_getNumeroFlotante( &bufferEmployee.salary,"Ingrese el salario: ",
+									"ERROR",ZERO,MAX_SALARY,QTY_REINT) &&
+			!utn_getNumero( &bufferEmployee.sector,"Ingrese el sector: ",
+			                "ERROR",ZERO,MAX_SECTOR,QTY_REINT))
+		{
+			bufferEmployee.id = list[indice].id;
+			list[indice]=bufferEmployee;
+			ret=0;
 		}
 	}
 	return ret;

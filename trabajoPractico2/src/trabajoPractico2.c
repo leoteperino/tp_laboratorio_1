@@ -15,22 +15,18 @@
 #include "utn.h"
 #include "ArrayEmployees.h"
 
-#define MIN_OPTION_MENU 1
-#define MAX_OPTION_MENU 4
-#define MAX_OPTION_MENU_INFO 5
-#define MAX_SALARY 999999
-#define MAX_SECTOR 50
-
 int main(void)
 {
 	//Declaracion de las Variables
 	Employee employees[ARRAY_LEN_EMPLOYEES];
 	int optionMenu;
-	int id = 0;
+	int id=0;
 	char name[ARRAY_NAME_LEN];
 	char lastName[ARRAY_LASTNAME_LEN];
 	float salary;
 	int sector;
+	int auxIndice;
+	int auxId;
 
 	//Inicializacion del Array
 	if(!initEmployees(employees,ARRAY_LEN_EMPLOYEES))
@@ -41,6 +37,18 @@ int main(void)
 	{
 		printf("\nEl Array no pudo inicializarse!!\n");
 	}
+
+	//Mocks
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,0,id,"Pepe","Mujica",45000,1);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,1,id,"Pepe","Argento",55000,2);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,2,id,"Pepe","Gonzalez",65800,3);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,3,id,"Diego","Maradona",78000,4);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,4,id,"Fernando","Gomez",80000,5);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,5,id,"Pablo","Gimenez",92100,1);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,6,id,"Alberto","Fernandez",55000,8);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,7,id,"Cristina","Kirchner",64100.30,9);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,8,id,"Patricia","Bulrich",43000,7);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,9,id,"Daniela","Garay",48000,8);
 
 	//Menu Principal
 	do
@@ -75,12 +83,35 @@ int main(void)
 						printf("Algo salio mal, se acabaron tus reintentos.\n");
 					}
 					printf("Lista de empleados:\n");
-					mostrarLista(employees,ARRAY_LEN_EMPLOYEES);
+					printEmployees(employees,ARRAY_LEN_EMPLOYEES);
 					printf("\n***************************************\n");
 					break;
 				case 2:
 					printf("\n***************************************\n");
 					printf("Opcion 2\nModificar un empleado:\n");
+					if(!printEmployees(employees,ARRAY_LEN_EMPLOYEES))
+					{
+						if(!utn_getNumero(	&auxId,
+										"Ingrese el numero de ID del empleado a modificar: ",
+										"ERROR\n",ZERO,MAX_ID,QTY_REINT))
+						{
+							auxIndice = findEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
+							if(auxIndice>=0)
+							{
+
+							}
+							else
+							{
+								printf("Usted ingreso un ID que no existe.\n");
+							}
+						}
+
+					}
+					else
+					{
+						printf("La lista de empleado esta vacia.\nDebe cargar un empleado para poder continuar.\n");
+					}
+
 					printf("\n***************************************\n");
 					break;
 				case 3:

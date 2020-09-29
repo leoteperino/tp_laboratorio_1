@@ -15,6 +15,12 @@
 #define TRUE 1
 #define FALSE 0
 #define ARRAY_LEN_EMPLOYEES 1000
+#define MIN_OPTION_MENU 1
+#define MAX_OPTION_MENU 4
+#define MAX_OPTION_MENU_INFO 5
+#define MAX_SALARY 999999
+#define MAX_SECTOR 50
+#define MAX_ID 999999
 
 typedef struct
 {
@@ -29,7 +35,8 @@ typedef struct
 int initEmployees(Employee* list, int len);
 int findEmployeeById(Employee* list, int len,int id);
 int addEmployee(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector);
-int mostrarLista(Employee* list, int len);
+int printEmployees(Employee* list, int len);
 int buscarVacio(Employee* list, int len);
+int mocksEmployees(Employee* list, int len, int indice, int id, char* name,char* lastName,float salary,int sector);
 
 #endif /* ARRAYEMPLOYEES_H_ */
