@@ -11,6 +11,7 @@
 #include <string.h>
 #include "utn.h"
 #include "ArrayEmployees.h"
+#include "Informes.h"
 
 static int generarIdNuevo(void);
 
@@ -394,6 +395,79 @@ int removeEmployee(Employee* list, int len, int id)
 		else
 		{
 				printf("Usted ingreso un ID que no existe.\n");
+		}
+	}
+	return ret;
+}
+/**
+* \brief Sort the elements in the array of employees, the argument order indicate UP or DOWN order
+* \param list Employee*
+* \param len int
+* \param order int [1] indicate UP - [0] indicate DOWN
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*/
+int sortEmployees(Employee* list, int len, int order)
+{
+	int ret=-1;
+	int flagSwap;
+	int i;
+	Employee buffer;
+	if(list!=NULL && len>0)
+	{
+		do
+		{
+			flagSwap = 0;
+			for(i=0;i<len-1;i++)
+			{
+				if(list[i].isEmpty || list[i+1].isEmpty)
+				{
+					continue;
+				}
+				if(order)
+				{
+					if(strncmp(list[i].lastName,list[i+1].lastName,ARRAY_LEN_NOMBRE) > 0 || list[i].sector > list[i+1].sector)
+					{
+						flagSwap = 1;
+						buffer = list[i];
+						list[i] = list[i+1];
+						list[i+1]=buffer;
+					}
+
+				}
+				else
+				{
+					if(strncmp(list[i].lastName,list[i+1].lastName,ARRAY_LEN_NOMBRE) < 0 || list[i].sector < list[i+1].sector)
+					{
+						flagSwap = 1;
+						buffer = list[i];
+						list[i] = list[i+1];
+						list[i+1]=buffer;
+					}
+				}
+			}
+			len--;
+		}while(flagSwap);
+	}
+	return ret;
+}
+
+int checkListaVacia(Employee* list, int len)
+{
+	int ret=-1;
+	int contador = 0;
+	int i;
+	if(list!=NULL && len>0)
+	{
+		for(i=0;i<len;i++)
+		{
+			if(list[i].isEmpty==FALSE)
+			{
+				contador++;
+			}
+		}
+		if(contador>0)
+		{
+			ret=0;
 		}
 	}
 	return ret;

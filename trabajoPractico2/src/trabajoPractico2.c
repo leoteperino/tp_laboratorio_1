@@ -14,6 +14,7 @@
 #include <string.h>
 #include "utn.h"
 #include "ArrayEmployees.h"
+#include "Informes.h"
 
 int main(void)
 {
@@ -28,6 +29,10 @@ int main(void)
 	int auxIndice;
 	int auxId;
 	int optionMenuEdit;
+	int auxSort;
+	float totalSalario;
+	float promedio;
+	int auxCantidad;
 
 	//Inicializacion del Array
 	if(!initEmployees(employees,ARRAY_LEN_EMPLOYEES))
@@ -40,16 +45,16 @@ int main(void)
 	}
 
 	//Mocks
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,0,id,"Pepe","Mujica",45000,1);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,1,id,"Pepe","Argento",55000,2);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,2,id,"Pepe","Gonzalez",65800,3);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,3,id,"Diego","Maradona",78000,4);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,4,id,"Fernando","Gomez",80000,5);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,5,id,"Pablo","Gimenez",92100,1);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,6,id,"Alberto","Fernandez",55000,8);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,7,id,"Cristina","Kirchner",64100.30,9);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,8,id,"Patricia","Bulrich",43000,7);
-	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,9,id,"Daniela","Garay",48000,8);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,0,id,"Pepe","Mujica",10000,1);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,1,id,"Pepe","Argento",45689,2);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,2,id,"Pepe","Gonzalez",85420,3);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,3,id,"Diego","Maradona",35820,4);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,4,id,"Fernando","Gomez",10000,5);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,5,id,"Pablo","Gimenez",10000,1);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,6,id,"Alberto","Fernandez",45820,8);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,7,id,"Cristina","Kirchner",85470,9);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,8,id,"Patricia","Bulrich",56980,7);
+	mocksEmployees(employees,ARRAY_LEN_EMPLOYEES,9,id,"Daniela","Garay",71250,8);
 
 	//Menu Principal
 	do
@@ -194,56 +199,83 @@ int main(void)
 								printf("Lista de empleados actualizada:\n");
 								printEmployees(employees,ARRAY_LEN_EMPLOYEES);
 							}
-							else
-							{
-								printf("El empleado no fue dado de baja.\n");
-							}
 						}
 					}
 					printf("\n***************************************\n");
 					break;
 				case 4:
 					printf("\n***************************************\n");
-					do
+					if(checkListaVacia(employees,ARRAY_LEN_EMPLOYEES)==-1)
 					{
-						if(!utn_getNumero(	&optionMenu,
-											"\n*****Informar*****\n"
-											"1 - Lista de Empleados ordenada Alfabeticamente.\n"
-											"2 - Total de los salarios.\n"
-											"3 - Promedio de los salarios.\n"
-											"4 - Cantidad de empleados que superan el salario promedio.\n"
-											"5 - Volver al Menu Principal.\n"
-											"-----------------------------\n"
-											"Elija una Opcion del Menu: ",
-											"\nERROR",MIN_OPTION_MENU,MAX_OPTION_MENU_INFO,QTY_REINT))
+						printf("La lista de empleado esta vacia.\nDebe cargar un empleado para poder continuar.\n");
+					}
+					else
+					{
+						do
 						{
-							switch(optionMenu)
+							if(!utn_getNumero(	&optionMenu,
+												"\n*****Informar*****\n"
+												"1 - Lista de Empleados ordenada.\n"
+												"2 - Total y Promedio de los salarios.\n"
+												"3 - Cantidad de empleados que superan el salario promedio.\n"
+												"4 - Volver al Menu Principal.\n"
+												"-----------------------------\n"
+												"Elija una Opcion del Menu: ",
+												"\nERROR",MIN_OPTION_MENU,MAX_OPTION_MENU_INFO,QTY_REINT))
 							{
-								case 1:
-									printf("\n***************************************\n");
-									printf("Lista de Emplados por orden alfabetico:\n");
-									printf("\n***************************************\n");
-									break;
-								case 2:
-									printf("\n***************************************\n");
-									printf("Total del salario:\n");
-									printf("\n***************************************\n");
-									break;
-								case 3:
-									printf("\n***************************************\n");
-									printf("Promedio de los salarios:\n");
-									printf("\n***************************************\n");
-									break;
-								case 4:
-									printf("\n***************************************\n");
-									printf("Cantidad de empleados que superan el salario promedio:\n");
-									printf("\n***************************************\n");
-									break;
+								switch(optionMenu)
+								{
+									case 1:
+										printf("\n***************************************\n");
+										if(!utn_getNumero(&auxSort,
+														  "Indique como desea ordenar la lista:\n"
+														  "1 - Ascendente\n"
+														  "0 - Descendente\n"
+														  "-----------------------------\n"
+														  "Elija una Opcion del Menu: ",
+														  "ERROR",ZERO,MAX_SORT,QTY_REINT))
+										{
+											if(auxSort)
+											{
+												printf("Lista de Emplados ordenada por Nombre y Sector Ascendente:\n");
+												sortEmployees(employees,ARRAY_LEN_EMPLOYEES,auxSort);
+												printEmployees(employees,ARRAY_LEN_EMPLOYEES);
+											}
+											else
+											{
+												printf("Lista de Emplados ordenada por Nombre y Sector Descendente:\n");
+												sortEmployees(employees,ARRAY_LEN_EMPLOYEES,auxSort);
+												printEmployees(employees,ARRAY_LEN_EMPLOYEES);
+											}
+
+										}
+										printf("\n***************************************\n");
+										break;
+									case 2:
+										printf("\n***************************************\n");
+										printf("Total y Promedio de los salarios:\n");
+										if(!info_PromedioTotalSalarios(&promedio, &totalSalario, employees, ARRAY_LEN_EMPLOYEES))
+										{
+											printf("El total de los salarios es: %.2f\n", totalSalario);
+											printf("El promedio de todos los salarios es: %.2f\n", promedio);
+										}
+										printf("\n***************************************\n");
+										break;
+									case 3:
+										printf("\n***************************************\n");
+										printf("Cantidad de empleados que superan el salario promedio:\n");
+										info_PromedioTotalSalarios(&promedio, &totalSalario, employees, ARRAY_LEN_EMPLOYEES);
+										if(!info_calcularEmpleadosQueSuperanSalarioPromedio(employees,ARRAY_LEN_EMPLOYEES,promedio,&auxCantidad))
+										{
+											printf("La cantidad de empleados que superan el salario promedio son: %d\n", auxCantidad);
+										}
+										printf("\n***************************************\n");
+										break;
+								}
 							}
-						}
-					}while(optionMenu!=5);
+						}while(optionMenu!=4);
+					}
 					printf("\n***************************************\n");
-					break;
 			}
 		}
 	}while(optionMenu);

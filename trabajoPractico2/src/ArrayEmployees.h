@@ -17,13 +17,13 @@
 #define ARRAY_LEN_EMPLOYEES 1000
 #define MIN_OPTION_MENU 1
 #define MAX_OPTION_MENU 4
-#define MAX_OPTION_MENU_INFO 5
+#define MAX_OPTION_MENU_INFO 4
 #define MAX_SALARY 999999
 #define MAX_SECTOR 50
 #define MAX_ID 999999
 #define MIN_OPTION_EDIT 1
 #define MAX_OPTION_EDIT 5
-#define CLEAR "clear"
+#define MAX_SORT 1
 
 typedef struct
 {
@@ -48,5 +48,6 @@ int editLastNameEmployee(Employee* list, int len, int indice);
 int editSalaryEmployee(Employee* list, int len, int indice);
 int editSectorEmployee(Employee* list, int len, int indice);
 int removeEmployee(Employee* list, int len, int id);
+int sortEmployees(Employee* list, int len, int order);
 
 #endif /* ARRAYEMPLOYEES_H_ */
