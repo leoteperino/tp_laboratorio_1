@@ -36,18 +36,15 @@ typedef struct
 }Employee;
 
 int initEmployees(Employee* list, int len);
-int findEmployeeById(Employee* list, int len,int id);
 int addEmployee(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector);
-int printEmployees(Employee* list, int len);
-int buscarVacio(Employee* list, int len);
-int mocksEmployees(Employee* list, int len, int indice, int id, char* name,char* lastName,float salary,int sector);
-int editEmployee(Employee* list, int len, int indice);
-int printEmployeeById(Employee* list, int len, int id);
-int editNameEmployee(Employee* list, int len, int indice);
-int editLastNameEmployee(Employee* list, int len, int indice);
-int editSalaryEmployee(Employee* list, int len, int indice);
-int editSectorEmployee(Employee* list, int len, int indice);
+int findEmployeeById(Employee* list, int len,int id);
+int editEmployeeSelect(Employee* list, int len, int indice, int numeroCampo);
 int removeEmployee(Employee* list, int len, int id);
+int printEmployees(Employee* list, int len);
 int sortEmployees(Employee* list, int len, int order);
+int buscarVacio(Employee* list, int len);
+int printEmployeeById(Employee* list, int len, int id);
+int checkListaVacia(Employee* list, int len);
+int mocksEmployees(Employee* list, int len, int indice, int id, char* name,char* lastName,float salary,int sector);
 
 #endif /* ARRAYEMPLOYEES_H_ */

@@ -124,48 +124,20 @@ int main(void)
 														"Ingrese la opcion deseada: ",
 														"ERROR",MIN_OPTION_EDIT,MAX_OPTION_EDIT,QTY_REINT))
 									{
-										switch(optionMenuEdit)
+										if(!editEmployeeSelect(employees,ARRAY_LEN_EMPLOYEES,auxIndice,optionMenuEdit))
 										{
-											case 1:
-												if(!editNameEmployee(employees,ARRAY_LEN_EMPLOYEES,auxIndice))
-												{
-													printf("\n***************************************\n");
-													printf("El empleado se edito con exito!\n");
-													printf("Empleado actualizado: \n");
-													printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
-													printf("***************************************\n");
-												}
-												break;
-											case 2:
-												if(!editLastNameEmployee(employees,ARRAY_LEN_EMPLOYEES,auxIndice))
-												{
-													printf("\n***************************************\n");
-													printf("El empleado se edito con exito!\n");
-													printf("Empleado actualizado: \n");
-													printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
-													printf("***************************************\n");
-												}
-												break;
-											case 3:
-												if(!editSalaryEmployee(employees,ARRAY_LEN_EMPLOYEES,auxIndice))
-												{
-													printf("\n***************************************\n");
-													printf("El empleado se edito con exito!\n");
-													printf("Empleado actualizado: \n");
-													printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
-													printf("***************************************\n");
-												}
-												break;
-											case 4:
-												if(!editSectorEmployee(employees,ARRAY_LEN_EMPLOYEES,auxIndice))
-												{
-													printf("\n***************************************\n");
-													printf("El empleado se edito con exito!\n");
-													printf("Empleado actualizado: \n");
-													printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
-													printf("***************************************\n");
-												}
-												break;
+											if(optionMenuEdit==5)
+											{
+											    printf("\n");
+											}
+											else
+											{
+												printf("\n***************************************\n");
+												printf("El empleado se edito con exito!\n");
+												printf("Empleado actualizado: \n");
+												printEmployeeById(employees,ARRAY_LEN_EMPLOYEES,auxId);
+												printf("***************************************\n");
+											}
 										}
 									}
 								}while(optionMenuEdit!=5);
