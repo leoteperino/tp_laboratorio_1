@@ -89,12 +89,14 @@ int main(void)
 						printf("Algo salio mal, se acabaron tus reintentos.\n");
 					}
 					printf("Lista de empleados:\n");
+					sortEmployeesID(employees,ARRAY_LEN_EMPLOYEES);
 					printEmployees(employees,ARRAY_LEN_EMPLOYEES);
 					printf("\n***************************************\n");
 					break;
 				case 2:
 					printf("\n***************************************\n");
 					printf("Opcion 2\nModificar un empleado:\n");
+					sortEmployeesID(employees,ARRAY_LEN_EMPLOYEES);
 					if(printEmployees(employees,ARRAY_LEN_EMPLOYEES)==-1)
 					{
 						printf("La lista de empleado esta vacia.\nDebe cargar un empleado para poder continuar.\n");
@@ -153,6 +155,7 @@ int main(void)
 				case 3:
 					printf("\n***************************************\n");
 					printf("Opcion 3\nDar de baja un empleado:\n");
+					sortEmployeesID(employees,ARRAY_LEN_EMPLOYEES);
 					if(printEmployees(employees,ARRAY_LEN_EMPLOYEES)==-1)
 					{
 						printf("La lista de empleado esta vacia.\nDebe cargar un empleado para poder continuar.\n");
@@ -169,6 +172,7 @@ int main(void)
 							{
 								printf("El empleado fue dado de baja con exito!!\n");
 								printf("Lista de empleados actualizada:\n");
+								sortEmployeesID(employees,ARRAY_LEN_EMPLOYEES);
 								printEmployees(employees,ARRAY_LEN_EMPLOYEES);
 							}
 						}

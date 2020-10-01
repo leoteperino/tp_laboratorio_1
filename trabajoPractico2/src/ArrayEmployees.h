@@ -46,5 +46,6 @@ int buscarVacio(Employee* list, int len);
 int printEmployeeById(Employee* list, int len, int id);
 int checkListaVacia(Employee* list, int len);
 int mocksEmployees(Employee* list, int len, int indice, int id, char* name,char* lastName,float salary,int sector);
+int sortEmployeesID(Employee* list, int len);
 
 #endif /* ARRAYEMPLOYEES_H_ */

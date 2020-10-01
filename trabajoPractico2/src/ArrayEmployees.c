@@ -276,7 +276,7 @@ int printEmployees(Employee* list, int len)
 			if(list[i].isEmpty==FALSE)
 			{
 				ret=0;
-				printf("ID:%d	- Nombre:%s %s - Salario:%.2f - Sector:%d\n",
+				printf("ID:%d	| Nombre:%s %s | Salario:%.2f | Sector:%d\n",
 						list[i].id,
 						list[i].name,
 						list[i].lastName,
@@ -341,7 +341,7 @@ int printEmployeeById(Employee* list, int len, int id)
 			if(list[i].isEmpty==FALSE && list[i].id==id)
 			{
 				ret=0;
-				printf("ID:%d - Nombre:%s - Apellido:%s - Salario:%.2f - Sector:%d\n",
+				printf("ID:%d | Nombre:%s | Apellido:%s | Salario:%.2f | Sector:%d\n",
 						list[i].id,
 						list[i].name,
 						list[i].lastName,
@@ -406,6 +406,38 @@ int mocksEmployees(Employee* list, int len, int indice, int id, char* name,char*
 		bufferEmployee.sector=sector;
 		list[indice] = bufferEmployee;
 		ret=0;
+	}
+	return ret;
+}
+/**
+* \brief Sort the elements in the array of employees for ID number
+* \param list Employee*
+* \param len int
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*/
+int sortEmployeesID(Employee* list, int len)
+{
+	int ret=-1;
+	int flagSwap;
+	int i;
+	Employee buffer;
+	if(list!=NULL && len>0)
+	{
+		do
+		{
+			flagSwap = 0;
+			for(i=0;i<len-1;i++)
+			{
+				if(list[i].id > list[i+1].id)
+				{
+					flagSwap = 1;
+					buffer = list[i];
+					list[i] = list[i+1];
+					list[i+1]=buffer;
+				}
+			}
+			len--;
+		}while(flagSwap);
 	}
 	return ret;
 }
