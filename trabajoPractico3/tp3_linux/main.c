@@ -6,7 +6,6 @@
 
 /****************************************************
     Menu:
-     TEST TEST TEST TEST
      1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
      2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).
      3. Alta de empleado
@@ -23,7 +22,6 @@
 
 int main()
 {
-	printf("Hola TP3\n");
     int option = 0;
 
     LinkedList* listaEmpleados = ll_newLinkedList();
