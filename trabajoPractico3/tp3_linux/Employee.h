@@ -1,5 +1,10 @@
 #ifndef employee_H_INCLUDED
 #define employee_H_INCLUDED
+
+#define QTY_REINT 2
+#define MIN_OPTION_MENU 1
+#define MAX_OPTION_MENU 10
+
 typedef struct
 {
     int id;

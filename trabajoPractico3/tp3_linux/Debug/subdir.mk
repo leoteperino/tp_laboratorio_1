@@ -7,19 +7,22 @@ C_SRCS += \
 ../Controller.c \
 ../Employee.c \
 ../main.c \
-../parser.c 
+../parser.c \
+../utn.c 
 
 OBJS += \
 ./Controller.o \
 ./Employee.o \
 ./main.o \
-./parser.o 
+./parser.o \
+./utn.o 
 
 C_DEPS += \
 ./Controller.d \
 ./Employee.d \
 ./main.d \
-./parser.d 
+./parser.d \
+./utn.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
