@@ -5,7 +5,9 @@
 #define MIN_OPTION_MENU 1
 #define MAX_OPTION_MENU 10
 #define LEN_NOMBRE 128
-#define LEN_ID 999999999
+#define LEN_ID 999999
+#define LEN_HORAS 5
+#define LEN_SUELDO 10
 
 typedef struct
 {

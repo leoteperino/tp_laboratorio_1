@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
+#include <string.h>
 #include "LinkedList.h"
 #include "Employee.h"
-
+#include "parser.h"
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
@@ -13,7 +15,18 @@
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+	//Aca se abre el archivo en modo lectura y se lo paso a parser
+	int ret=-1;
+	if(path!=NULL && pArrayListEmployee!=NULL)
+	{
+		FILE* pFile = fopen(path,"r");
+		if(pFile!=NULL)
+		{
+			ret = parser_EmployeeFromText(pFile, pArrayListEmployee);
+		}
+		fclose(pFile);
+	}
+    return ret;
 }
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).

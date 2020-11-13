@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
 #include "LinkedList.h"
 #include "Employee.h"
 
@@ -12,8 +13,70 @@
  */
 int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 {
+	int ret=-1;
+	char id[LEN_ID];
+	char nombre[LEN_NOMBRE];
+	char horas[LEN_HORAS];
+	char sueldo[LEN_SUELDO];
+	int response;
+	Employee* bufferEmployee;
 
-    return 1;
+	do
+	{
+		response = fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",id,nombre,horas,sueldo);
+		if(response==4)
+		{
+			bufferEmployee = employee_newParametrosTXT(id, nombre, horas, sueldo);
+			if(bufferEmployee!=NULL)
+			{
+				if(!(ll_add(pArrayListEmployee, bufferEmployee)))
+				{
+					ret = 0;
+					printf("Cargo el constructor");
+					break;
+				}
+				else
+				{
+					employee_delete(bufferEmployee);
+				}
+			}
+		}
+		else
+		{
+			printf("No leyo nada");
+		}
+	}while(feof(pFile)==0);
+	return ret;
+//	int response;
+//	//Inicializo los Array para los campos del empleado
+//	char bufferID[LEN_ID];
+//	char bufferNombre[LEN_NOMBRE];
+//	char bufferHoras[LEN_HORAS];
+//	char bufferSueldo[LEN_SUELDO];
+//	Employee* bufferEmployee;
+//
+//	if(pFile!=NULL && pArrayListEmployee!=NULL)
+//	{
+//		do
+//		{
+//			response = fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",bufferID,bufferNombre,bufferHoras,bufferSueldo);
+//			if(response==4)
+//			{
+//				bufferEmployee = employee_newParametrosTXT(bufferID, bufferNombre, bufferHoras, bufferSueldo);
+//				if(bufferEmployee!=0)
+//				{
+//					if(!(ll_add(pArrayListEmployee, bufferEmployee)))
+//					{
+//						ret = 0;
+//					}
+//					else
+//					{
+//						employee_delete(bufferEmployee);
+//					}
+//				}
+//			}
+//		}while(!feof(pFile));
+//	}
 }
 
 /** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo binario).

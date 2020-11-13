@@ -49,7 +49,7 @@ int employee_setIdChar(Employee* this,char* id)
 {
 	int ret=-1;
 	int bufferID;
-	if(this!=NULL && id!=NULL && esNumerica(id,LEN_ID))
+	if(this!=NULL && id!=NULL)
 	{
 		ret=0;
 		bufferID = atoi(id);
@@ -61,7 +61,7 @@ int employee_setIdChar(Employee* this,char* id)
 int employee_setNombre(Employee* this,char* nombre)
 {
 	int ret=-1;
-	if(this!=NULL && nombre!=NULL && esNombre(nombre, LEN_NOMBRE))
+	if(this!=NULL && nombre!=NULL)
 	{
 		ret=0;
 		strncpy(this->nombre,nombre,LEN_NOMBRE);
@@ -73,7 +73,7 @@ int employee_setHorasTrabajadasChar(Employee* this,char* horasTrabajadas)
 {
 	int ret=-1;
 	int bufferHoras;
-	if(this!=NULL && horasTrabajadas!=NULL && esNumerica(horasTrabajadas,sizeof(this->horasTrabajadas)))
+	if(this!=NULL && horasTrabajadas!=NULL)
 	{
 		ret=0;
 		bufferHoras = atoi(horasTrabajadas);
@@ -86,7 +86,7 @@ int employee_setSueldoChar(Employee* this,char* sueldo)
 {
 	int ret=-1;
 	int bufferSueldo;
-	if(this!=NULL && sueldo!=NULL && esNumerica(sueldo, sizeof(this->sueldo)))
+	if(this!=NULL && sueldo!=NULL)
 	{
 		ret=0;
 		bufferSueldo = atoi(sueldo);

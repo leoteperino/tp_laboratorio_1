@@ -24,8 +24,8 @@
 int main()
 {
     int option = 0;
-
     LinkedList* listaEmpleados = ll_newLinkedList();
+
     do{
     	if(!utn_getNumero(   &option,
 							"\n*****Menu de Opciones*****\n"
@@ -45,7 +45,14 @@ int main()
         switch(option)
         {
             case 1:
-                controller_loadFromText("data.csv",listaEmpleados);
+            	if(!controller_loadFromText("data.csv",listaEmpleados))
+            	{
+            		printf("OK");
+            	}
+            	else
+            	{
+            		printf("NO OK");
+            	}
                 break;
             case 2:
 				printf("2\n");
