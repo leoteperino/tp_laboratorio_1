@@ -5,6 +5,9 @@
 #include "LinkedList.h"
 #include "Employee.h"
 #include "parser.h"
+#include "utn.h"
+
+static int controller_newEmployeeId(LinkedList* pArrayListEmployee, int* id);
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
@@ -69,7 +72,30 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int ret=-1;
+	int bufferId;
+	char bufferNombre[LEN_NOMBRE];
+	int bufferHoras;
+	int bufferSueldo;
+	Employee* this;
+	if(pArrayListEmployee!=NULL)
+	{
+		if( !controller_newEmployeeId(pArrayListEmployee, &bufferId) &&
+			!utn_getNombre(bufferNombre,LEN_NOMBRE,"Ingrese nombre del empleado: ","ERROR",QTY_REINT) &&
+			!utn_getNumero(&bufferHoras,"Ingrese horas trabajadas: ","ERROR",ZERO,MAX_HORAS,QTY_REINT) &&
+			!utn_getNumero(&bufferSueldo,"Ingrese el sueldo: ","ERROR",ZERO,MAX_SUELDO,QTY_REINT))
+		{
+			this = employee_newParam(bufferId,bufferNombre,bufferHoras,bufferSueldo);
+			if(this!=NULL)
+			{
+				if(!ll_add(pArrayListEmployee, this))
+				{
+					ret=0;
+				}
+			}
+		}
+	}
+    return ret;
 }
 
 /** \brief Modificar datos de empleado
@@ -127,24 +153,6 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 		}
 	}
 	return ret;
-
-//	int output = -1;
-//	int len = ll_len(pArrayListEmployee);
-//	Employee* aux;
-//	if(pArrayListEmployee != NULL)
-//	{
-//		for(int x = 0; x < len; x++)
-//		{
-//			aux = (Employee*)ll_get(pArrayListEmployee, x);
-//			if(aux != NULL)
-//			{
-//				printf("%5d |%22s| %20d| %20.2f|\n", employee_getId(aux), employee_getNombre(aux),
-//												employee_getHorasTrabajadas(aux), employee_getSueldo(aux));
-//			}
-//			output = 0;
-//		}
-//	}
-//	return output;
 }
 
 /** \brief Ordenar empleados
@@ -169,6 +177,49 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
     return 1;
+}
+
+int controller_employeeFindMaxId(LinkedList* pArrayListEmployee, int* id)
+{
+	int ret=-1;
+	Employee* this;
+	int idMax;
+	int i;
+	int len_ll;
+	if(pArrayListEmployee!=NULL && id>=0)
+	{
+		len_ll = ll_len(pArrayListEmployee);
+		for(i=0;i<len_ll;i++)
+		{
+			this = (Employee*)ll_get(pArrayListEmployee,i);
+			if(this!=NULL)
+			{
+				if(this->id > idMax || i==0)
+				{
+					idMax = this->id;
+				}
+				*id = idMax;
+				ret=0;
+			}
+		}
+	}
+	return ret;
+}
+
+static int controller_newEmployeeId(LinkedList* pArrayListEmployee, int* id)
+{
+	int ret=-1;
+	static int newId;
+	if(pArrayListEmployee!=NULL && id>=0)
+	{
+		if(!controller_employeeFindMaxId(pArrayListEmployee,&newId))
+		{
+			newId++;
+			*id = newId;
+			ret=0;
+		}
+	}
+	return ret;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).

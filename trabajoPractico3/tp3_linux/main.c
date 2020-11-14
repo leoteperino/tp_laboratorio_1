@@ -58,7 +58,14 @@ int main()
 				printf("2\n");
 				break;
             case 3:
-            	printf("3\n");
+            	if(!controller_addEmployee(listaEmpleados))
+            	{
+            		printf("Se cargo un nuevo empleado!!");
+            	}
+            	else
+				{
+					printf("ERROR, no se cargaron los datos\n");
+				}
 				break;
             case 4:
             	printf("4\n");

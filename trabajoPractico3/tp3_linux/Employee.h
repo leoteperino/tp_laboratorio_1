@@ -1,6 +1,7 @@
 #ifndef employee_H_INCLUDED
 #define employee_H_INCLUDED
 
+#define ZERO 0
 #define QTY_REINT 2
 #define MIN_OPTION_MENU 1
 #define MAX_OPTION_MENU 10
@@ -8,6 +9,8 @@
 #define LEN_ID 999999
 #define LEN_HORAS 4096
 #define LEN_SUELDO 4096
+#define MAX_HORAS 4096
+#define MAX_SUELDO 999999
 
 typedef struct
 {
@@ -19,7 +22,7 @@ typedef struct
 
 Employee* employee_new(void);
 Employee* employee_newParametrosTXT(char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldStr);
-Employee* employee_newParam(int id, char* nombre, int horasTrabajadas, float sueldo);
+Employee* employee_newParam(int id, char* nombre, int horasTrabajadas, int sueldo);
 int employee_delete(Employee* this);
 int employee_sortEmployeesByName(void*, void*);
 int employee_sortEmployeesById(void*, void*);

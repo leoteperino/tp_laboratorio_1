@@ -39,6 +39,28 @@ Employee* employee_newParametrosTXT(char* idStr,char* nombreStr,char* horasTraba
 	return NULL;
 }
 
+Employee* employee_newParam(int id, char* nombre, int horasTrabajadas, int sueldo)
+{
+	Employee* this = NULL;
+	this = employee_new();
+	if(id>=0 && nombre!=NULL && horasTrabajadas>=0 && sueldo>=0)
+	{
+		if( !employee_setId(this, id) &&
+			!employee_setNombre(this, nombre) &&
+			!employee_setHorasTrabajadas(this, horasTrabajadas) &&
+			!employee_setSueldo(this, sueldo))
+		{
+			return this;
+		}
+		else
+		{
+			employee_delete(this);
+			this = NULL;
+		}
+	}
+	return NULL;
+}
+
 int employee_delete(Employee* this)
 {
 	int ret=-1;
@@ -105,6 +127,40 @@ int employee_setSueldoChar(Employee* this,char* sueldo)
 	return ret;
 }
 
+/*###############################################*/
+/*################Setter Nativos####################*/
+int employee_setId(Employee* this,int id)
+{
+	int ret=-1;
+	if(this!=NULL && id>=0)
+	{
+		ret=0;
+		this->id = id;
+	}
+	return ret;
+}
+
+int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
+{
+	int ret=-1;
+	if(this!=NULL && horasTrabajadas>=0)
+	{
+		ret=0;
+		this->horasTrabajadas = horasTrabajadas;
+	}
+	return ret;
+}
+
+int employee_setSueldo(Employee* this,int sueldo)
+{
+	int ret=-1;
+	if(this!=NULL && sueldo>=0)
+	{
+		ret=0;
+		this->sueldo = sueldo;
+	}
+	return ret;
+}
 /*###############################################*/
 /*################Getters Char###################*/
 int employee_getIdChar(Employee* this,char* id)
