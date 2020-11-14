@@ -6,6 +6,7 @@
 #include "Employee.h"
 #include "parser.h"
 #include "utn.h"
+#include "Controller.h"
 
 static int controller_newEmployeeId(LinkedList* pArrayListEmployee, int* id);
 
@@ -119,7 +120,38 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int ret=-1;
+	int bufferID;
+	int positionID;
+	int bufferIndexList;
+	Employee* this;
+	if(pArrayListEmployee!=NULL)
+	{
+		printf("############# Baja de Empleados ################\n");
+		controller_ListEmployee(pArrayListEmployee);
+		if(!utn_getNumero(&bufferID,"Ingrese el ID del empleado a borrar: ","ERROR",ZERO,LEN_ID,QTY_REINT))
+		{
+			if(!controller_employeeFindById(pArrayListEmployee,bufferID,&positionID))
+			{
+				this = (Employee*)ll_get(pArrayListEmployee, positionID);
+				if(this!=NULL)
+				{
+					printf("Empleado seleccionado: %s\n", employee_getNombreNativo(this));
+				}
+				bufferIndexList = ll_indexOf(pArrayListEmployee,this);
+				if( !employee_delete(this) &&
+					!ll_remove(pArrayListEmployee, bufferIndexList))
+				{
+					printf("El empleado ha sido borrado.\n");
+				}
+			}
+			else
+			{
+				printf("No se encontro el ID ingresado.\n");
+			}
+		}
+	}
+    return ret;
 }
 
 /** \brief Listar empleados
@@ -217,6 +249,29 @@ static int controller_newEmployeeId(LinkedList* pArrayListEmployee, int* id)
 			newId++;
 			*id = newId;
 			ret=0;
+		}
+	}
+	return ret;
+}
+
+int controller_employeeFindById(LinkedList* pArrayListEmployee, int id, int* indexPosition)
+{
+	int ret=-1;
+	Employee* this;
+	int i;
+	int len_ll;
+	if(pArrayListEmployee!=NULL && id>=0 && indexPosition>0)
+	{
+		len_ll=ll_len(pArrayListEmployee);
+		for(i=0;i<len_ll;i++)
+		{
+			this=(Employee*)ll_get(pArrayListEmployee, i);
+			if(employee_getIdNativo(this)==id)
+			{
+				*indexPosition = i;
+				ret=0;
+				break;
+			}
 		}
 	}
 	return ret;

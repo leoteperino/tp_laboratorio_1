@@ -1,5 +1,5 @@
 Controller.o: ../Controller.c ../LinkedList.h ../Employee.h ../parser.h \
- ../utn.h
+ ../utn.h ../Controller.h
 
 ../LinkedList.h:
 
@@ -8,3 +8,5 @@ Controller.o: ../Controller.c ../LinkedList.h ../Employee.h ../parser.h \
 ../parser.h:
 
 ../utn.h:
+
+../Controller.h:

@@ -71,7 +71,7 @@ int main()
             	printf("4\n");
 				break;
             case 5:
-            	printf("5\n");
+            	controller_removeEmployee(listaEmpleados);
 				break;
             case 6:
             	controller_ListEmployee(listaEmpleados);
