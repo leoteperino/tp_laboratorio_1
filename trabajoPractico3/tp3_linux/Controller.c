@@ -105,7 +105,46 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int ret=-1;
+	int len_ll;
+	int i;
+	Employee* this;
+	if(pArrayListEmployee!=NULL)
+	{
+		ret=0;
+		len_ll = ll_len(pArrayListEmployee);
+		for(i=0;i<len_ll;i++)
+		{
+			this = (Employee*)ll_get(pArrayListEmployee, i);
+			if(this!=NULL)
+			{
+				printf( "%d-%s-%d-%d\n",
+						employee_getIdNativo(this),
+						employee_getNombreNativo(this),
+						employee_getHorasTrabajadasNativo(this),
+						employee_getSueldoNativo(this));
+			}
+		}
+	}
+	return ret;
+
+//	int output = -1;
+//	int len = ll_len(pArrayListEmployee);
+//	Employee* aux;
+//	if(pArrayListEmployee != NULL)
+//	{
+//		for(int x = 0; x < len; x++)
+//		{
+//			aux = (Employee*)ll_get(pArrayListEmployee, x);
+//			if(aux != NULL)
+//			{
+//				printf("%5d |%22s| %20d| %20.2f|\n", employee_getId(aux), employee_getNombre(aux),
+//												employee_getHorasTrabajadas(aux), employee_getSueldo(aux));
+//			}
+//			output = 0;
+//		}
+//	}
+//	return output;
 }
 
 /** \brief Ordenar empleados
@@ -143,11 +182,11 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
 //	int retorno = -1;
 //	int i;
-	//Creo un puntero al archivo
+//	//Creo un puntero al archivo
 //	FILE* pFile;
-	//Genero un puntero a un empleado
+//	//Genero un puntero a un empleado
 //	Employee* pEmpleado;
-	//Guardo en una variable cuando mide la lista
+//	//Guardo en una variable cuando mide la lista
 //	int len = ll_len(pArrayListEmployee);
 //	if(path != NULL && pArrayListEmployee != NULL)
 //	{
@@ -169,6 +208,6 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 //		}
 //	}
 //	fclose(pFile);
-    return 1;
+	return 1;
 }
 

@@ -47,11 +47,11 @@ int main()
             case 1:
             	if(!controller_loadFromText("data.csv",listaEmpleados))
             	{
-            		printf("OK");
+            		printf("Los datos fueron cargados con exito!!\n");
             	}
             	else
             	{
-            		printf("NO OK");
+            		printf("ERROR, no se cargaron los datos\n");
             	}
                 break;
             case 2:
@@ -67,7 +67,7 @@ int main()
             	printf("5\n");
 				break;
             case 6:
-            	printf("6\n");
+            	controller_ListEmployee(listaEmpleados);
 				break;
             case 7:
             	printf("7\n");

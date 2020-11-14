@@ -6,8 +6,8 @@
 #define MAX_OPTION_MENU 10
 #define LEN_NOMBRE 128
 #define LEN_ID 999999
-#define LEN_HORAS 5
-#define LEN_SUELDO 10
+#define LEN_HORAS 4096
+#define LEN_SUELDO 4096
 
 typedef struct
 {
@@ -46,5 +46,11 @@ int employee_setHorasTrabajadasChar(Employee* this,char* horasTrabajadas);
 int employee_getHorasTrabajadasChar(Employee* this,char* horasTrabajadas);
 int employee_setSueldoChar(Employee* this,char* sueldo);
 int employee_getSueldoChar(Employee* this,char* sueldo);
+
+//Getter Nativos
+char* employee_getNombreNativo(Employee* this);
+int employee_getSueldoNativo(Employee* this);
+int employee_getHorasTrabajadasNativo(Employee* this);
+int employee_getIdNativo(Employee* this);
 
 #endif // employee_H_INCLUDED
