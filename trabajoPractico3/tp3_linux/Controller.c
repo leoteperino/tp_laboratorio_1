@@ -58,7 +58,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 	//Debo cerrar el archivo despues de usarlo
 //	fclose(pFile);
 
-	//Voy a retornanr lo que me devuelva la funcion parser_EmployeeBinary
+	//Voy a retornar lo que me devuelva la funcion parser_EmployeeBinary
 	//Puedo retornar la funcion directamente o guardarla en una variable y retornar la variable
     //return parser_EmployeeFromBinary(pFile, pArrayListEmployee);
 	int ret = -1;
@@ -68,7 +68,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 		pFile=fopen(path,"rb");
 		if(pFile!=NULL)
 		{
-			if(parser_EmployeeFromBinary(pFile, pArrayListEmployee))
+			if(!parser_EmployeeFromBinary(pFile, pArrayListEmployee))
 			{
 				ret = 0;
 			}
