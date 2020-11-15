@@ -68,7 +68,7 @@ int main()
 				}
 				break;
             case 4:
-            	printf("4\n");
+            	controller_editEmployee(listaEmpleados);
 				break;
             case 5:
             	controller_removeEmployee(listaEmpleados);

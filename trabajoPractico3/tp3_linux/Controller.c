@@ -108,7 +108,49 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int ret=-1;
+	int bufferID;
+	int positionID;
+	Employee* this;
+	if(pArrayListEmployee!=NULL)
+	{
+		printf("############# Edicion de Empleados ################\n");
+		controller_ListEmployee(pArrayListEmployee);
+		if(!utn_getNumero(&bufferID,"Ingrese el ID del empleado a editar: ","ERROR",ZERO,LEN_ID,QTY_REINT))
+		{
+			if(!controller_employeeFindById(pArrayListEmployee,bufferID,&positionID))
+			{
+				this = (Employee*)ll_get(pArrayListEmployee, positionID);
+				if(this!=NULL)
+				{
+					printf( "Empleado seleccionado:\n"
+							"Nombre: %s\n"
+							"Horas trabajadas: %d\n"
+							"Sueldo: %d\n",
+							employee_getNombreNativo(this),
+							employee_getHorasTrabajadasNativo(this),
+							employee_getSueldoNativo(this));
+				}
+				if(	!utn_getNombre(this->nombre,LEN_NOMBRE,"Ingrese nuevo nombre: ","ERROR",QTY_REINT) &&
+					!utn_getNumero(&this->horasTrabajadas,"Ingrese las nuevas horas: ","ERROR",ZERO,LEN_HORAS,QTY_REINT) &&
+					!utn_getNumero(&this->sueldo,"Ingrese el nuevo sueldo: ","ERROR",ZERO,LEN_SUELDO,QTY_REINT))
+				{
+					if( !employee_setNombre(this, this->nombre) &&
+						!employee_setHorasTrabajadas(this, this->horasTrabajadas) &&
+						!employee_setSueldo(this, this->sueldo))
+					{
+						printf("El empleado se edito con exito!!\n");
+						ret=0;
+					}
+				}
+			}
+			else
+			{
+				printf("No se encontro el ID ingresado.\n");
+			}
+		}
+	}
+	return ret;
 }
 
 /** \brief Baja de empleado
