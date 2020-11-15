@@ -250,7 +250,22 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int ret=-1;
+    FILE* pFile;
+    if(path!=NULL && pArrayListEmployee!=NULL)
+    {
+    	pFile=fopen(path,"w");
+    	if(pFile!=NULL)
+    	{
+    		if(!parser_EmployeeWriteText(pFile, pArrayListEmployee))
+    		{
+    			ret = 0;
+    			printf("El archivo se guardo con exito!!");
+    		}
+    		fclose(pFile);
+    	}
+    }
+    return ret;
 }
 
 int controller_employeeFindMaxId(LinkedList* pArrayListEmployee, int* id)

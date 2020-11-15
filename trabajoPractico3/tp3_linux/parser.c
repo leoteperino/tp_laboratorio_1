@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include "LinkedList.h"
 #include "Employee.h"
+#include "parser.h"
 
 /** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo texto).
  *
@@ -41,6 +42,32 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 				}
 			}
 		}while(feof(pFile)==0);
+	}
+	return ret;
+}
+
+int parser_EmployeeWriteText(FILE* pFile, LinkedList* pArrayListEmployee)
+{
+	int ret=-1;
+	int len_ll;
+	Employee* this;
+	int i;
+	if(pFile!=NULL && pArrayListEmployee!=NULL)
+	{
+		len_ll=ll_len(pArrayListEmployee);
+		for(i=0;i<len_ll;i++)
+		{
+			this = (Employee*)ll_get(pArrayListEmployee, i);
+			if(this!=NULL)
+			{
+				fprintf(pFile,"%d,%s,%d,%d\n",
+						employee_getIdNativo(this),
+						employee_getNombreNativo(this),
+						employee_getHorasTrabajadasNativo(this),
+						employee_getSueldoNativo(this));
+			}
+			ret=0;
+		}
 	}
 	return ret;
 }

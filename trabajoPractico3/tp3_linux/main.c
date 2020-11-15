@@ -80,7 +80,7 @@ int main()
             	printf("7\n");
 				break;
             case 8:
-            	printf("8\n");
+            	controller_saveAsText("data.csv", listaEmpleados);
 				break;
             case 9:
             	printf("9\n");
