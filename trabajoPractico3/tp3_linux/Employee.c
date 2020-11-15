@@ -298,5 +298,44 @@ static int esNombre(char* cadena,int longitud)
 	return retorno;
 }
 
+int employee_sortEmployeesByName(void* pBuffer1, void* pBuffer2)
+{
+	int ret=-1;
+	if(pBuffer1!=NULL && pBuffer2!=NULL)
+	{
+		Employee* this1;
+		Employee* this2;
+		this1 = (Employee*) pBuffer1;
+		this2 = (Employee*) pBuffer2;
+		ret = strncmp(employee_getNombreNativo(this1),employee_getNombreNativo(this2), LEN_NOMBRE);
+	}
+	return ret;
+}
+
+int employee_sortEmployeesByHorasTrabajadas(void* pBuffer1, void* pBuffer2)
+{
+    int output = -1;
+    if(pBuffer1 != NULL && pBuffer2 != NULL)
+    {
+        Employee* e1;
+        Employee* e2;
+        e1 = (Employee*) pBuffer1;
+        e2 = (Employee*) pBuffer2;
+        if(employee_getHorasTrabajadasNativo(e1) > employee_getHorasTrabajadasNativo(e2))
+        {
+            output = 1;
+        }
+        else if(employee_getHorasTrabajadasNativo(e1) < employee_getHorasTrabajadasNativo(e2))
+        {
+            output = -1;
+        }
+        else
+        {
+            output = 0;
+        }
+    }
+    return output;
+}
+
 
 

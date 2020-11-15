@@ -238,7 +238,16 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+   int ret=-1;
+   if(pArrayListEmployee!=NULL)
+   {
+	   if(!ll_sort(pArrayListEmployee, employee_sortEmployeesByHorasTrabajadas, 1))
+	   {
+		   ret = 0;
+		   printf("Se ordeno con exito la lista de empleados por horas trabajadas\n");
+	   }
+   }
+   return ret;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
