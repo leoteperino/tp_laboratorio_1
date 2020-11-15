@@ -55,7 +55,14 @@ int main()
             	}
                 break;
             case 2:
-				printf("2\n");
+            	if(!controller_loadFromBinary("data.bin",listaEmpleados))
+				{
+					printf("Los datos fueron cargados con exito!!\n");
+				}
+				else
+				{
+					printf("ERROR, no se cargaron los datos\n");
+				}
 				break;
             case 3:
             	if(!controller_addEmployee(listaEmpleados))
@@ -83,7 +90,7 @@ int main()
             	controller_saveAsText("data.csv", listaEmpleados);
 				break;
             case 9:
-            	printf("9\n");
+            	controller_saveAsBinary("data.bin", listaEmpleados);
 				break;
             case 10:
             	printf("Hasta luego!!\n");

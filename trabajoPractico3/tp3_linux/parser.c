@@ -125,5 +125,55 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 //			}
 //		}while(!feof(pFile));
 //	}
-    return 1;
+	int ret=-1;
+	int valoresCampos;
+	if(pFile!=NULL && pArrayListEmployee!=NULL)
+	{
+		do
+		{
+			Employee* this = employee_new();
+			if(this!=NULL)
+			{
+				valoresCampos=fread(this,sizeof(Employee),1,pFile);
+				if(valoresCampos==1)
+				{
+					if(!ll_add(pArrayListEmployee, this))
+					{
+						ret = 0;
+					}
+				}
+				else
+				{
+					employee_delete(this);
+				}
+			}
+		}while(!feof(pFile));
+	}
+	return ret;
+}
+
+int parser_EmployeeToBinary(FILE* pFile , LinkedList* pArrayListEmployee)
+{
+    int ret = -1;
+    int camposLeidos;
+    Employee* this;
+    int i;
+    int len_ll;
+    if(pFile != NULL && pArrayListEmployee != NULL)
+    {
+    	len_ll = ll_len(pArrayListEmployee);
+		for(i=0; i<len_ll; i++)
+		{
+			this = (Employee*)ll_get(pArrayListEmployee, i);
+			if(this != NULL)
+			{
+				camposLeidos = fwrite(this, sizeof(Employee),1,pFile);
+				if(camposLeidos == 1)
+				{
+					ret = 0;
+				}
+			}
+		}
+    }
+    return ret;
 }

@@ -61,7 +61,21 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 	//Voy a retornanr lo que me devuelva la funcion parser_EmployeeBinary
 	//Puedo retornar la funcion directamente o guardarla en una variable y retornar la variable
     //return parser_EmployeeFromBinary(pFile, pArrayListEmployee);
-	return 1;
+	int ret = -1;
+	FILE* pFile;
+	if(path!=NULL && pArrayListEmployee!=NULL)
+	{
+		pFile=fopen(path,"rb");
+		if(pFile!=NULL)
+		{
+			if(parser_EmployeeFromBinary(pFile, pArrayListEmployee))
+			{
+				ret = 0;
+			}
+			fclose(pFile);
+		}
+	}
+	return ret;
 }
 
 /** \brief Alta de empleados
@@ -380,6 +394,21 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 //		}
 //	}
 //	fclose(pFile);
-	return 1;
+	int ret = -1;
+	FILE* pFile;
+	if(path != NULL && pArrayListEmployee != NULL)
+	{
+		pFile = fopen(path, "wb");
+		if(pFile != NULL)
+		{
+			if(!(parser_EmployeeToBinary(pFile, pArrayListEmployee)))
+			{
+				ret = 0;
+				printf("El archivo se guardo con exito!!");
+			}
+			fclose(pFile);
+		}
+	}
+	return ret;
 }
 
