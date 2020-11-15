@@ -50,11 +50,11 @@ int parser_EmployeeWriteText(FILE* pFile, LinkedList* pArrayListEmployee)
 {
 	int ret=-1;
 	int len_ll;
-	Employee* this;
 	int i;
 	if(pFile!=NULL && pArrayListEmployee!=NULL)
 	{
 		len_ll=ll_len(pArrayListEmployee);
+		Employee* this;
 		for(i=0;i<len_ll;i++)
 		{
 			this = (Employee*)ll_get(pArrayListEmployee, i);
@@ -145,6 +145,7 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 				else
 				{
 					employee_delete(this);
+					break;
 				}
 			}
 		}while(!feof(pFile));

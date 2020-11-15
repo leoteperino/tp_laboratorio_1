@@ -298,16 +298,32 @@ static int esNombre(char* cadena,int longitud)
 	return retorno;
 }
 
-int employee_sortEmployeesByName(void* pBuffer1, void* pBuffer2)
+int employee_sortEmployeesByName(void* thisA, void* thisB)
 {
-	int ret=-1;
-	if(pBuffer1!=NULL && pBuffer2!=NULL)
+	int ret = 0;
+	Employee* pEmployeeA = (Employee*)thisA;
+	Employee* pEmployeeB = (Employee*)thisB;
+	char bufferNombreA[LEN_NOMBRE];
+	char bufferNombreB[LEN_NOMBRE];
+	int respuestaStrcmp;
+
+	if(thisA!=NULL && thisB!=NULL)
 	{
-		Employee* this1;
-		Employee* this2;
-		this1 = (Employee*) pBuffer1;
-		this2 = (Employee*) pBuffer2;
-		ret = strncmp(employee_getNombreNativo(this1),employee_getNombreNativo(this2), LEN_NOMBRE);
+		employee_getNombre(pEmployeeA, bufferNombreA);
+		employee_getNombre(pEmployeeB, bufferNombreB);
+		respuestaStrcmp = strncmp(bufferNombreA,bufferNombreB,LEN_NOMBRE);
+		if(respuestaStrcmp > 0)
+		{
+			ret=1;
+		}
+		else if(respuestaStrcmp < 0)
+		{
+			ret=-1;
+		}
+		else
+		{
+			ret=0;
+		}
 	}
 	return ret;
 }

@@ -255,10 +255,10 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
    int ret=-1;
    if(pArrayListEmployee!=NULL)
    {
-	   if(!ll_sort(pArrayListEmployee, employee_sortEmployeesByHorasTrabajadas, 1))
+	   if(!ll_sort(pArrayListEmployee, employee_sortEmployeesByName, 1))
 	   {
 		   ret = 0;
-		   printf("Se ordeno con exito la lista de empleados por horas trabajadas\n");
+		   printf("Se ordeno con exito la lista de empleados por Nombre\n");
 	   }
    }
    return ret;
@@ -274,9 +274,9 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
     int ret=-1;
-    FILE* pFile;
     if(path!=NULL && pArrayListEmployee!=NULL)
     {
+    	FILE* pFile;
     	pFile=fopen(path,"w");
     	if(pFile!=NULL)
     	{
