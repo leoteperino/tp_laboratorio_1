@@ -15,14 +15,14 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement);
  */
 LinkedList* ll_newLinkedList(void)
 {
-    LinkedList* this= NULL;
-    this=(LinkedList*)malloc(sizeof(LinkedList));
-    if(this!=NULL)
-    {
-    	this->size=0;
-    	this->pFirstNode=NULL;
-    }
-    return this;
+	LinkedList* this=NULL;
+	this=malloc(sizeof(LinkedList));
+	if(this!=NULL)
+	{
+		this->pFirstNode=NULL;
+		this->size=0;
+	}
+	return this;
 }
 
 /** \brief Retorna la cantidad de elementos de la lista
@@ -51,15 +51,20 @@ int ll_len(LinkedList* this)
  */
 static Node* getNode(LinkedList* this, int nodeIndex)
 {
+	Node* nodoParaDevolver=NULL;
 	int i;
-	Node* nodoParaDevolver;
-	nodoParaDevolver = NULL;
-	if(this != NULL && nodeIndex>=0 && nodeIndex < ll_len(this)) //verifico que el indice sea menor al size del LL
+	if(this!=NULL && nodeIndex>=0 && nodeIndex<ll_len(this))
 	{
-		nodoParaDevolver = this->pFirstNode;
-		for(i=0; i<nodeIndex; i++)       // si el index es 0 no entra y deja el pfirstNode
+		if(this->pFirstNode!=NULL)
 		{
-			nodoParaDevolver = nodoParaDevolver->pNextNode;    //si entra lo va cargando y aumentando hasta dejar el del indice(que no entro pero lo evaluo desde el anterior)
+			nodoParaDevolver = this->pFirstNode;
+			if(nodeIndex>0)
+			{
+				for(i=0;i<nodeIndex;i++)
+				{
+					nodoParaDevolver = nodoParaDevolver->pNextNode;
+				}
+			}
 		}
 	}
 	return nodoParaDevolver;
