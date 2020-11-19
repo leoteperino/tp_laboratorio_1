@@ -85,13 +85,11 @@ Node* test_getNode(LinkedList* this, int nodeIndex)
 
 
 /** \brief Agrega y enlaza un nuevo nodo a la lista
- *
  * \param this LinkedList* Puntero a la lista
  * \param nodeIndex int Ubicacion donde se agregara el nuevo nodo
  * \param pElement void* Puntero al elemento a ser contenido por el nuevo nodo
  * \return int Retorna  (-1) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
                         ( 0) Si funciono correctamente
- *
  */
 static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
@@ -231,7 +229,7 @@ int ll_remove(LinkedList* this,int index)
 		{
 			if (index == 0)
 			{
-				this->pFirstNode = NULL;
+				this->pFirstNode = getNode(this, index+1);
 			}
 			else
 			{
