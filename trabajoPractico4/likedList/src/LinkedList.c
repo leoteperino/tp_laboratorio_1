@@ -266,7 +266,7 @@ int ll_clear(LinkedList* this)
 		len = ll_len(this);
 		if (len > 0)
 		{
-			for (i=0; i<len; i++)
+			for (i=len; i>=0; i--)
 			{
 				if(!(ll_remove(this, i)))
 				{
@@ -290,7 +290,9 @@ int ll_deleteLinkedList(LinkedList* this)
     int returnAux = -1;
     if (this!=NULL && !(ll_clear(this)))
 	{
-		this = NULL;
+    	free(this);
+		this->pFirstNode = NULL;
+		this->size = 0;
 		returnAux = 0;
 	}
     return returnAux;
